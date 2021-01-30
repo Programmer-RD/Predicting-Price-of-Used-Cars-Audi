@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        .footer {
+            position: fixed;
+            left:
+                0;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+    </style>
+    <link rel="icon"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz9pw0YLe3vYWhLA-hdHgQuozSWsmkriXKQw&usqp=CAU">
+    <title>Document</title>
+</head>
+
+<body style="color:white !important; background-color: gray !important; border-radius:25px !important;">
+    <center>
+    <br>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            <h3><b>{{ message }}</b></h3>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <br>
+    <h3 style="color: white !important;">Predicting Prices and Taxes of Cars *Audi Edition*</h3>
+    <small style="color: white;"><b>Working on creating the other editions also and the data is taken from <a href="kaggle.com">kaggle.com</a> <a href="https://www.kaggle.com/adityadesai13/used-car-dataset-ford-and-mercedes">Link for data</a> The data might change according to different conditions.</b></small>
+    <br>
+</center>
+    <div class="container">
+        <div class="jumbotron">
+            <form action="" method="POST">
+                <br>
+                <div class="mb-3">
+                    <label for="Millage" class="form-label">Millage</label>
+                    <input type="number" name="MI" class="form-control" id="Millage" placeholder="12345">
+                  </div>
+                  <br>
+                  <div class="mb-3">
+                    <label for="year" class="form-label">Year</label>
+                    <input type="number" name="Y" class="form-control" id="year" placeholder="2017">
+                  </div>
+                  <br>
+                  <div class="mb-3">
+                    <label for="mpg" class="form-label">MPG *Miles per Gallon*</label>
+                    <input type="number" name="MPG" class="form-control" id="mpg" placeholder="25">
+                  </div>
+                  <br>
+                  <div class="mb-3">
+                    <label for="es" class="form-label">Engine Size</label>
+                    <input type="number" name="E" class="form-control" id="es" placeholder="1.6">
+                  </div>
+                  <br>
+                <select name="M" class="form-select">
+                    <option selected>Click this and choose your option *Car Model*</option>
+                    {% for model_value,model_key in zip(models.values(),models.keys()) %}
+                    <option value="{{ model_value }}">{{model_key}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <select name="T" class="form-select">
+                    <option selected>Click this and choose your option *Transmission*</option>
+                    {% for transmission_value,transmission_key in zip(transmissions.values(),transmissions.keys()) %}
+                    <option value="{{ transmission_value }}">{{transmission_key}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <select name="F" class="form-select">
+                    <option selected>Click this and choose your option *Fuel Type*</option>
+                    {% for fuel_value,fuel_key in zip(fueltypes.values(),fueltypes.keys()) %}
+                    <option value="{{ fuel_value }}">{{fuel_key}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <center>
+                <button type="submit"  class="btn btn-primary btn-lg"> Submit <br> *Find the Price and Taxes for the Car that you want* </button>
+            </center>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <h3><b>
+                Copyright © 2021 RanugaD
+            </b></h3>
+    </footer>
+</body>
+
+</html>
